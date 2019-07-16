@@ -1,5 +1,7 @@
 package com.gioidev.appthoitiet.Retrofit;
 
+import com.gioidev.appthoitiet.WeatherRepone;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

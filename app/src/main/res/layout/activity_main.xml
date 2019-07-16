@@ -33,6 +33,7 @@
             android:orientation="vertical"
             android:background="#8686CE"
             android:layout_height="match_parent">
+
             <ImageView
                 android:layout_marginTop="15dp"
                 android:layout_gravity="center"
@@ -226,7 +227,7 @@
                 <ImageView
                     android:layout_marginTop="15dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/do"
+                    android:src="@drawable/nhietdo"
                     android:background="#8686CE"
                     android:layout_width="40dp"
                     android:layout_height="40dp" />
