@@ -14,19 +14,23 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
+            <EditText
                 android:id="@+id/tvCountry"
                 android:textColor="#FFFFFF"
-                android:layout_marginLeft="120dp"
+                android:layout_marginLeft="100dp"
                 android:textSize="25dp"
                 android:text="HONG KONG"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/btFind"
+                android:src="@drawable/ic_search_white_24dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     <LinearLayout
@@ -58,7 +62,7 @@
                 android:id="@+id/tvDoCountry"
                 android:layout_gravity="center"
                 android:textColor="#FFFFFF"
-                android:textSize="100sp"
+                android:textSize="60sp"
                 android:text="23°"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

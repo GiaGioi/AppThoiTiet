@@ -1,12 +1,12 @@
 package com.gioidev.appthoitiet;
 
-import android.opengl.Visibility;
-
-import com.gioidev.appthoitiet.Recycleview.WeatherAdapter;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.List;
+
+/**
+ * Created by Mushtaq on 05-11-2018.
+ */
 
 public class WeatherResponse {
 
@@ -49,6 +49,7 @@ class Clouds {
     @SerializedName("all")
     public float all;
 }
+
 class Rain {
     @SerializedName("3h")
     public float h3;

@@ -12,4 +12,7 @@ public interface Service {
     @GET("data/2.5/weather?")
     Call<WeatherResponse> getCurrentWeatherData(@Query("lat") String lat, @Query("lon") String lon, @Query("APPID") String app_id);
 
+    @GET("data/2.5/forecast/daily?")
+    Call<WeatherResponse> getListWeather(@Query("id") String id, @Query("APPID") String app_id);
+
 }

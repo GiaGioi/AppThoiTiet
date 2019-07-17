@@ -25,6 +25,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.util.List;
 
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     public static String AppId = "729e7343363e8c0d477bf76416e89116";
     public static String lat = "51.51";
     public static String lon = "-0.13";
+    public static String id = "524901";
     private WeatherAdapter adapter;
     private RecyclerView recyclerView;
 
@@ -59,9 +61,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         init();
         getDataWeather();
+        generateDataList(7);
 
     }
-
     public void init() {
         tvfeel = findViewById(R.id.tvfeel);
         tvnhietdo = findViewById(R.id.tvnhietdo);
@@ -91,11 +93,14 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(retrofit2.Call<WeatherResponse> call, Response<WeatherResponse> response) {
 
                 if (response.code() == 200) {
+
                     WeatherResponse weatherResponse = response.body();
                     assert weatherResponse != null;
+//                    JSONObject sysObject = response.getJSONObject("sys");
+//                    String country = String.valueOf(weatherResponse.getString("country"));
                     int nhietdo = (int) Float.parseFloat(String.valueOf(weatherResponse.wind.deg));
                     tvnhietdo.setText(String.valueOf(nhietdo)+"°F");
-                    generateDataList(nhietdo);
+
 
                     int gio = (int) Float.parseFloat(String.valueOf(weatherResponse.wind.speed));
                     tocdo.setText(String.valueOf(gio)+"m/s");
@@ -113,19 +118,42 @@ public class MainActivity extends AppCompatActivity {
                     Dewpoint.setText(String.valueOf(point)+"°F");
                 }
             }
-
             @Override
             public void onFailure(Call<WeatherResponse> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Không có dữ liệu trả về", Toast.LENGTH_SHORT).show();
             }
         });
+
+
     }
     private void generateDataList(int list) {
         recyclerView = findViewById(R.id.rvDetail);
+        recyclerView.setHasFixedSize(true);
         adapter = new WeatherAdapter(list,MainActivity.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+    }
+    public void listWeather(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BaseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Service service = retrofit.create(Service.class);
+        retrofit2.Call<WeatherResponse> call = service.getListWeather(id, AppId);
+        call.enqueue(new Callback<WeatherResponse>() {
+            @Override
+            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<WeatherResponse> call, Throwable t) {
+
+            }
+        });
+
+
     }
 
 }

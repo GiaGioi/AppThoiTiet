@@ -25,7 +25,7 @@ public class WeatherAdapter  extends RecyclerView.Adapter<WeatherAdapter.CustomV
         this.context = context;
     }
 
-    class CustomViewHolder extends RecyclerView.ViewHolder {
+    public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         public final View mView;
         private TextView nhietdo;
