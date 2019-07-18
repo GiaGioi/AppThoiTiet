@@ -66,7 +66,10 @@ public class HomeActivity extends AppCompatActivity {
         tvDoCountry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this,MainActivity.class));
+                String cName = tvCountry.getText().toString();
+                Intent intent = new Intent(HomeActivity.this,MainActivity.class);
+                intent.putExtra("name",cName);
+                startActivity(intent);
             }
         });
         btFind.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +95,9 @@ public class HomeActivity extends AppCompatActivity {
 
                     Log.e("Weather", weather);
                     //Weather Array
+                    String key;
                     JSONArray jsonArray = new JSONArray(weather);
+                    JSONObject object = jsonArray.getJSONObject(0);
 
                     String main ="";
                     String city = "";
@@ -104,9 +109,8 @@ public class HomeActivity extends AppCompatActivity {
                     for (int i = 0; i <jsonArray.length() ; i++) {
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                         main = jsonObject1.getString("main");
-
+                        imageWeather = jsonObject1.getString("icon");
                     }
-
                     JSONObject mainPart = new JSONObject(mainTemperature);
                     temperature = mainPart.getInt("temp") + "°";
 
@@ -116,12 +120,15 @@ public class HomeActivity extends AppCompatActivity {
                     JSONObject temp_max = new JSONObject(mainTemperature);
                     temp_Max = temp_max.getDouble("temp_max") + "°C";
 
-                    Log.e("Main: ", main );
+                    Log.e("data", String.valueOf(jsonArray));
+
 
                     tvclear.setText(main);
                     tvDoCountry.setText(temperature);
                     tvNhietdothapnhat.setText(tempMin);
                     tvNhietdocaonhat.setText(temp_Max);
+
+                    Glide.with(HomeActivity.this).load("http://openweathermap.org/img/wn/"+imageWeather+ ".png").into(imageCloud);
 
                 } catch (Exception e) {
                     e.printStackTrace();

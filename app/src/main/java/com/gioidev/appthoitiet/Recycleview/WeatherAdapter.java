@@ -11,8 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.Model;
+import com.gioidev.appthoitiet.HomeActivity;
 import com.gioidev.appthoitiet.Model.Temp;
+import com.gioidev.appthoitiet.Model.ThoiTiet;
 import com.gioidev.appthoitiet.Model.Weather;
 import com.gioidev.appthoitiet.R;
 import com.gioidev.appthoitiet.WeatherResponse;
@@ -25,9 +28,11 @@ import java.util.List;
 
 public class WeatherAdapter  extends RecyclerView.Adapter<WeatherAdapter.CustomViewHolder> {
 
-    private List<Temp> modelList;
 
-    public WeatherAdapter(List<Temp> modelList) {
+    private Context context;
+    private ArrayList<ThoiTiet> modelList;
+    public WeatherAdapter(Context context, ArrayList<ThoiTiet> modelList) {
+        this.context = context;
         this.modelList = modelList;
     }
 
@@ -37,6 +42,8 @@ public class WeatherAdapter  extends RecyclerView.Adapter<WeatherAdapter.CustomV
         private TextView nhietdo;
         private TextView tvnhietdongay;
         private TextView tvnhietdodem;
+        private TextView day;
+        private ImageView imageCloud;
 
         CustomViewHolder(View itemView) {
             super(itemView);
@@ -45,6 +52,9 @@ public class WeatherAdapter  extends RecyclerView.Adapter<WeatherAdapter.CustomV
             nhietdo = mView.findViewById(R.id.nhietdo);
             tvnhietdongay = mView.findViewById(R.id.tvnhietdongay);
             tvnhietdodem = mView.findViewById(R.id.tvnhietdodem);
+            day = mView.findViewById(R.id.day);
+            imageCloud = mView.findViewById(R.id.imageCloud);
+
 
 //            String url = "https://samples.openweathermap.org/data/2.5/forecast/daily?id=524901&appid=b1b15e88fa797225412429c1c50c122a1";
 //            JSONObject jsonObject = null;
@@ -76,26 +86,14 @@ public class WeatherAdapter  extends RecyclerView.Adapter<WeatherAdapter.CustomV
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-//            holder.nhietdo.setText(modelList.get(position).getDay());
-        holder.tvnhietdongay.setText(modelList.get(position).getMax());
-        String url = "https://samples.openweathermap.org/data/2.5/forecast/daily?id=524901&appid=b1b15e88fa797225412429c1c50c122a1";
-        JSONObject jsonObject = null;
-        String tempMax = "";
-        try {
-            jsonObject = new JSONObject(url);
-            String weather = jsonObject.getString("weather");
-            String mainTemperature = jsonObject.getString("temp");
+        ThoiTiet thoiTiet = modelList.get(position);
 
-            JSONObject mainPart = new JSONObject(mainTemperature);
-            tempMax = mainPart.getInt("min") + "°";
+        holder.day.setText(thoiTiet.getDay());
+        holder.nhietdo.setText(thoiTiet.getHumidity());
+        holder.tvnhietdongay.setText(thoiTiet.getMax());
+        holder.tvnhietdodem.setText(thoiTiet.getMin());
 
-            holder.tvnhietdongay.setText(tempMax);
-            Log.e("Data", tempMax );
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        Glide.with(context).load("http://openweathermap.org/img/wn/"+thoiTiet.getImageView()+".png").into(holder.imageCloud);
     }
 
     @Override
