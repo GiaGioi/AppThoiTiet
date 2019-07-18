@@ -6,12 +6,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gioidev.appthoitiet.Model.Temp;
 import com.gioidev.appthoitiet.Recycleview.WeatherAdapter;
 import com.gioidev.appthoitiet.Retrofit.Client;
 import com.gioidev.appthoitiet.Retrofit.Service;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONObject;
 
@@ -23,6 +27,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.Request;
@@ -54,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public static String id = "524901";
     private WeatherAdapter adapter;
     private RecyclerView recyclerView;
+    private List<Temp> tempList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         init();
         getDataWeather();
-        generateDataList(7);
-
+        generateDataList(tempList);
     }
+
     public void init() {
         tvfeel = findViewById(R.id.tvfeel);
         tvnhietdo = findViewById(R.id.tvnhietdo);
@@ -87,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Service service = retrofit.create(Service.class);
-        retrofit2.Call<WeatherResponse> call = service.getCurrentWeatherData(lon,lat, AppId);
+        retrofit2.Call<WeatherResponse> call = service.getCurrentWeatherData(lon, lat, AppId);
         call.enqueue(new retrofit2.Callback<WeatherResponse>() {
             @Override
             public void onResponse(retrofit2.Call<WeatherResponse> call, Response<WeatherResponse> response) {
@@ -96,14 +103,13 @@ public class MainActivity extends AppCompatActivity {
 
                     WeatherResponse weatherResponse = response.body();
                     assert weatherResponse != null;
-//                    JSONObject sysObject = response.getJSONObject("sys");
-//                    String country = String.valueOf(weatherResponse.getString("country"));
-                    int nhietdo = (int) Float.parseFloat(String.valueOf(weatherResponse.wind.deg));
-                    tvnhietdo.setText(String.valueOf(nhietdo)+"°F");
 
+                    int nhietdo = (int) Float.parseFloat(String.valueOf(weatherResponse.wind.deg));
+                    int init = (nhietdo - 100) / 3;
+                    tvnhietdo.setText(String.valueOf(init) + "°C");
 
                     int gio = (int) Float.parseFloat(String.valueOf(weatherResponse.wind.speed));
-                    tocdo.setText(String.valueOf(gio)+"m/s");
+                    tocdo.setText(String.valueOf(gio) + "m/s");
 
                     String doam = weatherResponse.main.humidity + "%";
                     Humidity.setText(String.valueOf(doam));
@@ -111,11 +117,13 @@ public class MainActivity extends AppCompatActivity {
                     String tocdo = weatherResponse.main.temp + "in";
                     Pressure.setText(String.valueOf(tocdo));
 
-                    String nuoc = (weatherResponse.sys.country);
-                    Visilibity.setText(String.valueOf(nuoc));
+                    String nuoc = weatherResponse.sys.country + "N/a";
+                    Visilibity.setText("US");
 
                     int point = (int) Float.parseFloat(String.valueOf(weatherResponse.wind.deg));
-                    Dewpoint.setText(String.valueOf(point)+"°F");
+                    int init2 = (point - 100) / 3;
+                    Dewpoint.setText(String.valueOf(init2) + "°C");
+                    generateDataList(tempList);
                 }
             }
             @Override
@@ -126,34 +134,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    private void generateDataList(int list) {
+
+    private void generateDataList(List<Temp> list) {
         recyclerView = findViewById(R.id.rvDetail);
         recyclerView.setHasFixedSize(true);
-        adapter = new WeatherAdapter(list,MainActivity.this);
+        adapter = new WeatherAdapter(list);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-    }
-    public void listWeather(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BaseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        Service service = retrofit.create(Service.class);
-        retrofit2.Call<WeatherResponse> call = service.getListWeather(id, AppId);
-        call.enqueue(new Callback<WeatherResponse>() {
-            @Override
-            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<WeatherResponse> call, Throwable t) {
-
-            }
-        });
-
-
     }
 
 }

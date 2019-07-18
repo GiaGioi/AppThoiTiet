@@ -1,5 +1,6 @@
 package com.gioidev.appthoitiet.Retrofit;
 
+import com.gioidev.appthoitiet.Model.Temp;
 import com.gioidev.appthoitiet.WeatherResponse;
 
 import retrofit2.Call;
@@ -14,5 +15,12 @@ public interface Service {
 
     @GET("data/2.5/forecast/daily?")
     Call<WeatherResponse> getListWeather(@Query("id") String id, @Query("APPID") String app_id);
+
+    @GET("data/2.5/forecast/daily?")
+    Call<Temp> getTamp(@Query("id") String id, @Query("APPID") String app_id);
+
+    @GET("data/2.5/forecast/daily?")
+    Call<Temp> getAllWeather(@Query("id") String id, @Query("APPID") String app_id);
+
 
 }

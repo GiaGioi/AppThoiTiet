@@ -3,11 +3,6 @@ package com.gioidev.appthoitiet;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-
-/**
- * Created by Mushtaq on 05-11-2018.
- */
-
 public class WeatherResponse {
 
     @SerializedName("coord")

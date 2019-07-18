@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
@@ -45,10 +46,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView tvNhietdocaonhat,tvclear;
     private TextView tvNhietdothapnhat;
     private ImageView btFind;
-
-    interface Callback {
-        void getString(String str);
-    }
+    private ImageView imageCloud;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +59,8 @@ public class HomeActivity extends AppCompatActivity {
         tvNhietdothapnhat = findViewById(R.id.tvNhietdothapnhat);
         btFind = findViewById(R.id.btFind);
         tvclear =findViewById(R.id.tvClear);
+        imageCloud = findViewById(R.id.imageCloud);
+
 
 
         tvDoCountry.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +90,7 @@ public class HomeActivity extends AppCompatActivity {
                     String mainTemperature = jsonObject.getString("main");
                     double visibility;
 
-                    Log.e("Weather", weather );
+                    Log.e("Weather", weather);
                     //Weather Array
                     JSONArray jsonArray = new JSONArray(weather);
 
@@ -99,12 +99,14 @@ public class HomeActivity extends AppCompatActivity {
                     String temperature = "";
                     String tempMin = "";
                     String temp_Max="";
+                    String imageWeather = "";
 
                     for (int i = 0; i <jsonArray.length() ; i++) {
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                         main = jsonObject1.getString("main");
 
                     }
+
                     JSONObject mainPart = new JSONObject(mainTemperature);
                     temperature = mainPart.getInt("temp") + "°";
 
