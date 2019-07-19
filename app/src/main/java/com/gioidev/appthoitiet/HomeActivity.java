@@ -1,6 +1,7 @@
 package com.gioidev.appthoitiet;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +21,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.gson.JsonArray;
+import com.varunest.sparkbutton.SparkButton;
+import com.varunest.sparkbutton.SparkButtonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView tvDoCountry;
     private TextView tvNhietdocaonhat,tvclear;
     private TextView tvNhietdothapnhat;
-    private ImageView btFind;
+    private SparkButton btFind;
     private ImageView imageCloud;
 
     @Override
@@ -60,9 +63,6 @@ public class HomeActivity extends AppCompatActivity {
         btFind = findViewById(R.id.btFind);
         tvclear =findViewById(R.id.tvClear);
         imageCloud = findViewById(R.id.imageCloud);
-
-
-
         tvDoCountry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

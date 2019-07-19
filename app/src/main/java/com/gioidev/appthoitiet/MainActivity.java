@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -131,8 +132,8 @@ public class MainActivity extends AppCompatActivity {
 
                         String ngay = jsonObjectList.getString("dt");
                         long l = Long.valueOf(ngay);
-                        Date date = new Date((1*1000L)+1);
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE");
+                        Date date = new Date(l*1000L);
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE", Locale.ENGLISH);
                         String Day = simpleDateFormat.format(date);
 
                         JSONObject jsonObjectTemp = jsonObjectList.getJSONObject("temp");
@@ -164,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
                         Pressure.setText(pressure2);
                         Visilibity.setText(vibision);
 
-                        thoiTiets.add(new ThoiTiet(Day,icon,humidity,nhietdoMax,nhietdoMin));
+                        thoiTiets.add(new ThoiTiet(Day,humidity2,icon,nhietdoMax,nhietdoMin));
                     }
                     adapter.notifyDataSetChanged();
 

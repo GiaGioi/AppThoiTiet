@@ -255,6 +255,7 @@
         android:orientation="vertical"
         android:layout_height="wrap_content">
         <TextView
+            android:layout_marginTop="200dp"
             android:layout_marginLeft="10dp"
             android:padding="5dp"
             android:text="NEXT 7 DAYS"

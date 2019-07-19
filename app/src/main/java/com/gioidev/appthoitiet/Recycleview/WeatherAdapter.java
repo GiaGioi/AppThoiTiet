@@ -23,7 +23,9 @@ import com.gioidev.appthoitiet.WeatherResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class WeatherAdapter  extends RecyclerView.Adapter<WeatherAdapter.CustomViewHolder> {
@@ -55,28 +57,8 @@ public class WeatherAdapter  extends RecyclerView.Adapter<WeatherAdapter.CustomV
             day = mView.findViewById(R.id.day);
             imageCloud = mView.findViewById(R.id.imageCloud);
 
-
-//            String url = "https://samples.openweathermap.org/data/2.5/forecast/daily?id=524901&appid=b1b15e88fa797225412429c1c50c122a1";
-//            JSONObject jsonObject = null;
-//            String tempMax = "";
-//            try {
-//                jsonObject = new JSONObject(url);
-//                String weather = jsonObject.getString("weather");
-//                String mainTemperature = jsonObject.getString("temp");
-//
-//                JSONObject mainPart = new JSONObject(mainTemperature);
-//                tempMax = mainPart.getInt("min") + "°";
-//
-//                tvnhietdongay.setText(tempMax);
-//
-//
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-
         }
     }
-
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
