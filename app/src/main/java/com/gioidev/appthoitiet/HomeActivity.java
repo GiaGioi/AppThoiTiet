@@ -35,6 +35,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 
@@ -47,7 +50,7 @@ public class HomeActivity extends AppCompatActivity {
     private EditText tvCountry;
     private TextView tvDoCountry;
     private TextView tvNhietdocaonhat,tvclear;
-    private TextView tvNhietdothapnhat;
+    private TextView tvNhietdothapnhat,date2;
     private SparkButton btFind;
     private ImageView imageCloud;
 
@@ -60,6 +63,7 @@ public class HomeActivity extends AppCompatActivity {
         tvDoCountry = findViewById(R.id.tvDoCountry);
         tvNhietdocaonhat = findViewById(R.id.tvNhietdocaonhat);
         tvNhietdothapnhat = findViewById(R.id.tvNhietdothapnhat);
+        date2 = findViewById(R.id.date);
         btFind = findViewById(R.id.btFind);
         tvclear =findViewById(R.id.tvClear);
         imageCloud = findViewById(R.id.imageCloud);
@@ -91,6 +95,7 @@ public class HomeActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(content);
                     String weather = jsonObject.getString("weather");
                     String mainTemperature = jsonObject.getString("main");
+                    String ngay = jsonObject.getString("dt");
                     double visibility;
 
                     Log.e("Weather", weather);
@@ -120,6 +125,11 @@ public class HomeActivity extends AppCompatActivity {
                     JSONObject temp_max = new JSONObject(mainTemperature);
                     temp_Max = temp_max.getDouble("temp_max") + "°C";
 
+
+                    long l = Long.valueOf(ngay);
+                    Date date = new Date(l*1000L);
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE,hh:mm a", Locale.ENGLISH);
+                    String Day = simpleDateFormat.format(date);
                     Log.e("data", String.valueOf(jsonArray));
 
 
@@ -127,6 +137,7 @@ public class HomeActivity extends AppCompatActivity {
                     tvDoCountry.setText(temperature);
                     tvNhietdothapnhat.setText(tempMin);
                     tvNhietdocaonhat.setText(temp_Max);
+                    date2.setText(Day);
 
                     Glide.with(HomeActivity.this).load("http://openweathermap.org/img/wn/"+imageWeather+ ".png").into(imageCloud);
 
