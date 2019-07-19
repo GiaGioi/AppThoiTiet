@@ -32,16 +32,13 @@
                 android:textColor="#FFFFFF"
                 android:textSize="25dp" />
 
-            <com.varunest.sparkbutton.SparkButton
+            <ImageView
                 android:id="@+id/btFind"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                app:sparkbutton_activeImage="@drawable/ic_search_active"
-                app:sparkbutton_inActiveImage="@drawable/ic_search_white_24dp"
-                app:sparkbutton_primaryColor="@color/colorPrimary"
-                app:sparkbutton_secondaryColor="@color/colorAccent" />
+                android:src="@drawable/ic_search_white_24dp" />
         </LinearLayout>
 
         <TextView

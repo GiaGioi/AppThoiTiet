@@ -1,7 +1,6 @@
 package com.gioidev.appthoitiet.Retrofit;
 
 import com.gioidev.appthoitiet.Model.Temp;
-import com.gioidev.appthoitiet.WeatherResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

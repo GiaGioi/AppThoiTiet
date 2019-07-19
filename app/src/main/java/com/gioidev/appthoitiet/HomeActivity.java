@@ -21,8 +21,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.gson.JsonArray;
-import com.varunest.sparkbutton.SparkButton;
-import com.varunest.sparkbutton.SparkButtonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView tvDoCountry;
     private TextView tvNhietdocaonhat,tvclear;
     private TextView tvNhietdothapnhat,date2;
-    private SparkButton btFind;
+    private ImageView btFind;
     private ImageView imageCloud;
 
     @Override
@@ -128,7 +126,7 @@ public class HomeActivity extends AppCompatActivity {
 
                     long l = Long.valueOf(ngay);
                     Date date = new Date(l*1000L);
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE,hh:mm a", Locale.ENGLISH);
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, hh:mm a", Locale.ENGLISH);
                     String Day = simpleDateFormat.format(date);
                     Log.e("data", String.valueOf(jsonArray));
 

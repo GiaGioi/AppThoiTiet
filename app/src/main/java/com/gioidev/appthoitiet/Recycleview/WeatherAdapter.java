@@ -1,32 +1,19 @@
 package com.gioidev.appthoitiet.Recycleview;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.Model;
-import com.gioidev.appthoitiet.HomeActivity;
-import com.gioidev.appthoitiet.Model.Temp;
 import com.gioidev.appthoitiet.Model.ThoiTiet;
-import com.gioidev.appthoitiet.Model.Weather;
 import com.gioidev.appthoitiet.R;
-import com.gioidev.appthoitiet.WeatherResponse;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class WeatherAdapter  extends RecyclerView.Adapter<WeatherAdapter.CustomViewHolder> {
 

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AppThoiTiet</string>
+    <string name="detail">DETAIL <strike></strike></string>
 </resources>

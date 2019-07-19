@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
         rvDetail.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
 
     }
-
     public void init() {
         tvfeel = findViewById(R.id.tvfeel);
         tvnhietdo = findViewById(R.id.tvnhietdo);
